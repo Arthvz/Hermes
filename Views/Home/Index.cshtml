@@ -1,0 +1,60 @@
+﻿@using Hermes.Models
+@model IEnumerable<Hermes.Models.News>
+
+@{
+    ViewData["Title"] = "Sua base de notícias";
+}
+
+<style>
+    .carousel-control-prev {
+        left: -200px;
+    }
+
+    .carousel-control-next {
+        right: -200px;
+    }
+
+    .carousel-caption {
+        background-color: rgba(0, 0, 0, 0.5);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 25px;
+        text-align: left;
+        height: 30%; /* Ajuste este valor conforme necessário */
+    }
+
+    .carousel-caption h5 {
+        font-size: 3em; /* Ajuste este valor conforme necessário */
+    }
+</style>
+
+<div class="text-center">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var news in Model)
+            {
+            <div class="carousel-item @(news == Model.First() ? "active" : "")">
+                <a href="@Url.Action("Index", "News")" class="d-block w-100 h-100 text-white text-decoration-none">
+                    <img src="@news.ImageURL" class="d-block w-100 img-fluid max-height" alt="@news.Title">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@news.Title</h5>
+                    </div>
+                </a>
+            </div>
+            }
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon color-black" aria-hidden="true"></span>
+            <span class="sr-only text-black">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="sr-only text-black">Next</span>
+            <span class="carousel-control-next-icon color-black" aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <p class="mt-10">Text about the news website.</p>
+
+    <a href="/News" class="btn btn-primary">View News</a>
+</div>

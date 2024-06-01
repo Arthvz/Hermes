@@ -1,0 +1,30 @@
+@model News
+@using Microsoft.AspNetCore.Identity
+
+@if (User?.Identity?.IsAuthenticated == true && User.IsInRole("1"))
+{
+    <form asp-action="Create">
+        <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" class="form-control" id="imageUrl" asp-for="ImageURL" required>
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" asp-for="Title" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary</label>
+            <input type="text" class="form-control" id="summary" asp-for="Summary" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="form-control" id="content" asp-for="Content" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+}
+else
+{
+    <p>Access denied. You are not authorized to create news.</p>
+    <a asp-action="Index" asp-controller="News">Go back to News</a>
+}
